@@ -8,7 +8,7 @@ export default defineConfig(() => {
 
   return {
     // GitHub Pages serves project sites from /<repo>/, while local dev stays at /.
-    base: isGitHubActionsBuild ? '/Extra-Crispy/' : '/',
+    base: isGitHubActionsBuild ? '/extra-crispy-website/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

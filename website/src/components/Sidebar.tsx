@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search, ChevronLeft } from 'lucide-react';
 import { artworks, artists, getCountriesStats, getArtistCountriesStats } from '../data/mockData';
 import { ViewMode } from '../App';
+import { getAssetUrl } from '../utils/assetUrl';
 
 interface SidebarProps {
   selectedCountry: string | null;
@@ -90,7 +91,7 @@ export default function Sidebar({ selectedCountry, onSelectCountry, mode, select
             <div className="grid grid-cols-2 gap-2">
               {displayItems.map(item => (
                 <div key={item.id} className="aspect-square bg-[#D3CDBF]/50 rounded overflow-hidden relative group cursor-pointer">
-                  <img src={item.imageUrl} alt={'title' in item ? item.title : item.name} className="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <img src={getAssetUrl(item.imageUrl)} alt={'title' in item ? item.title : item.name} className="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
                     <span className="text-white text-xs truncate">
                       {'title' in item ? item.title : item.name}

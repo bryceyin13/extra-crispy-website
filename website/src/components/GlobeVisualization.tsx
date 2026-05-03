@@ -12,6 +12,8 @@ import {
   getGeoFeatureRegion,
 } from '../data/distributionData';
 
+import { getAssetUrl } from '../utils/assetUrl';
+
 const RADIUS = 5;
 const MAX_ALL_TIME_ARTWORKS_PER_COUNTRY = 40;
 const CHOROPLETH_RADIUS = RADIUS * 1.001;
@@ -55,7 +57,7 @@ function Marker({ data, isSelected }: { data: MarkerData, isSelected: boolean })
   const scale = isSelected ? 0.3 : (hovered ? 0.4 : 0.25);
   
   // Load texture for the image
-  const texture = useMemo(() => new THREE.TextureLoader().load(data.imageUrl), [data.imageUrl]);
+  const texture = useMemo(() => new THREE.TextureLoader().load(getAssetUrl(data.imageUrl)), [data.imageUrl]);
 
   return (
     <group position={position} quaternion={quaternion}>
@@ -77,7 +79,7 @@ function Marker({ data, isSelected }: { data: MarkerData, isSelected: boolean })
       {hovered && (
         <Html distanceFactor={15} zIndexRange={[100, 0]} className="pointer-events-none">
           <div className="bg-[#F4EFE6]/95 backdrop-blur-md p-2 rounded shadow-lg border border-[#D3CDBF] w-48 -translate-x-1/2 translate-y-2 text-[#3A352D]">
-            <img src={data.imageUrl} alt={data.title} className="w-full h-24 object-cover rounded mb-2 mix-blend-multiply" />
+            <img src={getAssetUrl(data.imageUrl)} alt={data.title} className="w-full h-24 object-cover rounded mb-2 mix-blend-multiply" />
             <h3 className="font-serif font-bold text-sm truncate">{data.title}</h3>
             <p className="text-xs text-[#8C857B] truncate">{data.subtitle}</p>
             <p className="text-xs text-[#8C857B] mt-1">{data.country}</p>
@@ -109,7 +111,7 @@ function CountryGallery({ country, mode, displayData }: { country: string, mode:
           <div className="grid grid-cols-3 gap-2">
             {items.map(item => (
               <div key={item.id} className="aspect-square rounded-md overflow-hidden relative bg-[#D3CDBF]/30">
-                <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover mix-blend-multiply" />
+                <img src={getAssetUrl(item.imageUrl)} alt={item.title} className="w-full h-full object-cover mix-blend-multiply" />
               </div>
             ))}
           </div>
